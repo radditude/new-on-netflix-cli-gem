@@ -1,4 +1,5 @@
 require "new_on_netflix/version"
+require_relative "lister.rb"
 
 module NewOnNetflix
     class ListNew
