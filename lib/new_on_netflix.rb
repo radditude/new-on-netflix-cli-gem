@@ -1,5 +1,4 @@
-require "new_on_netflix/version"
-require_relative "lister.rb"
+# require "new_on_netflix/version"
 
 module NewOnNetflix
     class ListNew
@@ -8,3 +7,5 @@ module NewOnNetflix
         end
     end
 end
+
+require_relative '../config/environment'
