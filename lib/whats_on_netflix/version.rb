@@ -1,3 +1,3 @@
-module NewOnNetflix
+module WhatsOnNetflix
   VERSION = "0.1.0"
 end

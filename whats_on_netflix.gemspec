@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'new_on_netflix/version'
+require 'whats_on_netflix/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "new-on-netflix"
-  spec.version       = NewOnNetflix::VERSION
+  spec.name          = "whats-on-netflix"
+  spec.version       = WhatsOnNetflix::VERSION
   spec.authors       = ["Clare"]
   spec.email         = ["clare.e.horton@gmail.com"]
 
@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
       "public gem pushes."
   end
 
-  spec.files         = ["config/environment.rb", "lib/new_on_netflix.rb, lib/new_on_netflix/lister.rb, lib/new_on_netflix/version.rb"]
+  spec.files         = ["config/environment.rb", "lib/whats_on_netflix.rb, lib/whats_on_netflix/lister.rb, lib/whats_on_netflix/version.rb"]
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
