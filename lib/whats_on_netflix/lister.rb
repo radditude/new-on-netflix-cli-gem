@@ -1,4 +1,4 @@
-module NewOnNetflix
+module WhatsOnNetflix
     class OneClass
         def greetings
             puts "howdy"

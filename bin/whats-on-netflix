@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/whats_on_netflix'
+
+WhatsOnNetflix::CLI.new.start
