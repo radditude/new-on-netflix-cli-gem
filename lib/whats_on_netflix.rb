@@ -4,27 +4,39 @@ module WhatsOnNetflix
     class CLI
         attr_accessor:current_input
         def start
+            @current_input = ""
             puts "Welcome to What's On Netflix!"
-            puts "Enter 'today' for today's new Netflix releases," 
-            puts "'coming-soon' for a full list of what's coming to Netflix soon,"
-            puts "or 'leaving-soon' for what to watch before it vanishes."
-            puts "Type 'exit' to quit."
-            @current_input = gets.strip
+            while @current_input != "exit"
+                puts "Available commands are: today, coming-soon, leaving-soon, and exit."
+                puts ""
+                @current_input = gets.strip
                 if @current_input == "coming-soon"
-                    puts "1. Princess Diaries"
-                    puts "2. X-Men"
-                    puts "3. Firefly - Season 4"
+                    puts ""
+                    puts "1. Princess Diaries (2001)"
+                    puts "2. X-Men (1999)"
+                    puts "3. Firefly - Season 4 (2002)"
+                    puts ""
+                    puts "Enter a number to learn more."
+                    @current_input = gets.strip
                 elsif @current_input == "leaving-soon"
-                    puts "1. Nothing"
-                    puts "2. Ever"
-                    puts "3. I miss Doctor Who"
+                    puts ""
+                    puts "1. Nothing (1956)"
+                    puts "2. Ever (1843)"
+                    puts "3. I miss Doctor Who (2012)"
+                    puts ""
+                    puts "Enter a number to learn more."
+                    @current_input = gets.strip
                 elsif @current_input == "today"
-                    puts "1. I'm"
-                    puts "2. Tired"
-                    puts "3. Of making lists"
-                elsif @current_input == "exit"
-                    puts "See you later!"
+                    puts ""
+                    puts "1. I'm (1988)"
+                    puts "2. Tired (2016)"
+                    puts "3. Of making lists - Season 5 (2016)"
+                    puts ""
+                    puts "Enter a number to learn more."
+                    @current_input = gets.strip
                 end
+            end
+            puts "See you later!"
         end
     end
 end
