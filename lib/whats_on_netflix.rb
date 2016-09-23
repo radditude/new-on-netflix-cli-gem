@@ -94,25 +94,31 @@ module WhatsOnNetflix
             while !exit?
                 list_available_commands
                 
-               # while !exit? && @input != "back"
-                    if @input == "coming-soon"
-                        list_coming_soon
-                        
-                        while !exit? && @input != "back"
-                            if @input.to_i > 0 && @input.to_i < (WhatsOnNetflix::Movie.coming_soon.length + 1)
-                                list_item_coming_soon(@input)
-                            else 
-                                unknown_command
-                            end
+                if @input == "coming-soon"
+                    list_coming_soon
+                    
+                    while !exit? && @input != "back"
+                        if @input.to_i > 0 && @input.to_i < (WhatsOnNetflix::Movie.coming_soon.length + 1)
+                            list_item_coming_soon(@input)
+                        else 
+                            unknown_command
                         end
-        
-                    elsif @input == "leaving-soon"
-                        list_leaving_soon
-                           # list_item_leaving_soon(@input)
-                    else
-                        unknown_command
                     end
-               # end
+    
+                elsif @input == "leaving-soon"
+                    list_leaving_soon
+                       
+                    while !exit? && @input != "back"
+                        if @input.to_i > 0 && @input.to_i < (WhatsOnNetflix::Movie.leaving_soon.length + 1)
+                            list_item_leaving_soon(@input)
+                        else 
+                            unknown_command
+                        end
+                    end
+                    
+                else
+                    unknown_command
+                end
             end
             exit
         end
