@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["clare.e.horton@gmail.com"]
 
   spec.summary       = "A summary"
-  spec.homepage      = "https://github.com/radditude/new-on-netflix-cli-gem"
+  spec.homepage      = "https://github.com/radditude/whats-on-netflix-cli-gem"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
       "public gem pushes."
   end
 
-  spec.files         = ["config/environment.rb", "lib/whats_on_netflix.rb, lib/whats_on_netflix/lister.rb, lib/whats_on_netflix/version.rb"]
+  spec.files         = ["config/environment.rb", "lib/whats_on_netflix.rb, lib/whats_on_netflix/movie.rb, lib/whats_on_netflix/version.rb, lib/whats_on_netflix/scraper.rb"]
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]

@@ -15,18 +15,32 @@ module WhatsOnNetflix
             puts ""
             puts "Available commands are: today, coming-soon, leaving-soon, and exit."
             puts ""
+            @list = gets.strip
+            if_exit
         end
         
         def list_options
             puts "= = = = = = = = = = = = = = ="
-            puts "Enter a number to learn more, or back to see a different list."
+            puts "Enter a number to learn more, back to see a different list."
+            puts "Enter exit at any time to exit."
             @item = gets.strip
         end
         
         def item_options
             puts "= = = = = = = = = = = = = = ="
-            puts "Enter list to see the list again."
+            puts "Enter list to see the list again, or exit to exit."
             @item = gets.strip
+        end
+        
+        def if_exit
+            if @item == "exit" || @list == "exit"
+                puts "See you later!"
+            end
+        end
+        
+        def unknown_command
+            puts "I'm sorry, I don't recognize that command."
+            puts ""
         end
         
         ### Actual Data
@@ -40,32 +54,7 @@ module WhatsOnNetflix
             puts "3. Firefly - Season 2 (2017)"
             puts ""
             list_options
-            case
-            when @item == "1"
-                puts ""
-                puts "Princess Diaries (2001) - Comedy - Starring Anne Hathaway, Julie Andrews"
-                puts ""
-                puts "This girl is a princess and she does stuff and Julie Andrews is a boss."
-                puts ""
-                item_options
-            when @item == "2"
-                puts ""
-                puts "X-Men (1999) - Sci-fi - Starring Hugh Jackman, Anna Paquin"
-                puts ""
-                puts "Mutants doing mutant stuff. Ian McKellan is in this movie."
-                puts ""
-                item_options
-            when @item == "3"
-                puts ""
-                puts "Firefly (2001) - Sci-fi - Starring Gina Rodriguez, Alan Tudyk"
-                puts ""
-                puts "Sci-fi cult show by that guy who does all the good sci-fi shows."
-                item_options
-            when @item == "list"
-                @list = "coming-soon"
-            when @item == "back"
-                @list = ""
-            end
+            if_exit
         end
         
         def list_leaving_soon
@@ -106,59 +95,46 @@ module WhatsOnNetflix
             end
         end
         
-        def list_today
-            puts ""
-            puts "Added Today on Netflix"
-            puts ""
-            puts "1. I'm (1988)"
-            puts "2. Tired (2016)"
-            puts "3. Of making lists - Season 5 (2016)"
-            puts ""
-            list_options
-            case
-            when @item == "1"
-                puts ""
-                puts "I'm (1988) - Documentary - Starring self"
-                puts ""
-                puts "This is a fake movie because I'm tired of making up plot summaries."
-                puts ""
-                item_options
-            when @item == "2"
-                puts ""
-                puts "Tired (2016) - True Crime - starring my bed"
-                puts ""
-                puts "Seriously ready to get on with the interesting part here."
-                puts ""
-                item_options
-            when @item == "3"
-                puts ""
-                puts "Of Making Lists (2011) - TV Series - Starring Li Ul, Li Ol"
-                puts ""
-                puts "This is the last item on my list!"
-                puts ""
-                item_options
-            when @item == "list"
-                @list = "today"
-            when @item == "back"
-                @list = ""
-            end
-        end
-        
         def start
-            while @list != "exit" && @item != "exit"
-                list_available_commands
-                @list = gets.strip
-                while @list == "coming-soon"
+            list_available_commands
+            if @list == "coming-soon"
+                list_coming_soon
+                if @item == "list"
                     list_coming_soon
+                elsif @item == "back"
+                    start
+                elsif @item == "1"
+                    puts ""
+                    puts "Princess Diaries (2001) - Comedy - Starring Anne Hathaway, Julie Andrews"
+                    puts ""
+                    puts "This girl is a princess and she does stuff and Julie Andrews is a boss."
+                    puts ""
+                    item_options
+                    if_exit
+                elsif @item == "2"
+                    puts ""
+                    puts "X-Men (1999) - Sci-fi - Starring Hugh Jackman, Anna Paquin"
+                    puts ""
+                    puts "Mutants doing mutant stuff. Ian McKellan is in this movie."
+                    puts ""
+                    item_options
+                    if_exit
+                elsif @item == "3"
+                    puts ""
+                    puts "Firefly (2001) - Sci-fi - Starring Gina Rodriguez, Alan Tudyk"
+                    puts ""
+                    puts "Sci-fi cult show by that guy who does all the good sci-fi shows."
+                    item_options
+                    if_exit
+                else
+                    unknown_command
+                    list_options
                 end
-                while @list == "leaving-soon"
-                    list_leaving_soon
-                end
-                while @list == "today"
-                    list_today
-                end
+            elsif @list == "leaving-soon"
+                list_leaving_soon
+            else
+                unknown_command
             end
-            puts "See you later!"
         end
     end
 end
