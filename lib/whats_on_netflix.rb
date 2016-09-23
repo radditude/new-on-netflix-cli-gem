@@ -3,13 +3,57 @@
 module WhatsOnNetflix
     class CLI
         attr_accessor:input
+        
         def initialize
             WhatsOnNetflix::Movie.add_movies
             @input = ""
             puts "Welcome to What's On Netflix!"
         end
         
-        ### CLI bits and pieces
+        def start
+            while !exit?
+                list_available_commands
+                
+                if @input == "coming-soon"
+                    list_coming_soon
+                    
+                    while !exit? && !back?
+                        if valid_number?(WhatsOnNetflix::Movie.coming_soon)
+                            list_item_coming_soon(@input)
+                        else 
+                            unknown_command
+                        end
+                    end
+    
+                elsif @input == "leaving-soon"
+                    list_leaving_soon
+                       
+                    while !exit? && !back?
+                        if valid_number?(WhatsOnNetflix::Movie.leaving_soon)
+                            list_item_leaving_soon(@input)
+                        else 
+                            unknown_command
+                        end
+                    end
+                    
+                elsif !exit?
+                    unknown_command
+                end
+            end
+            exit
+        end
+        
+        ### CLI dialogue
+        
+        def exit
+            puts "See you later!"
+        end
+        
+        def item_options
+            puts "= = = = = = = = = = = = = = ="
+            puts "Enter another number, back, or exit."
+            @input = gets.strip
+        end
         
         def list_available_commands
             puts ""
@@ -25,24 +69,6 @@ module WhatsOnNetflix
             @input = gets.strip
         end
         
-        def item_options
-            puts "= = = = = = = = = = = = = = ="
-            puts "Enter another number, back, or exit."
-            @input = gets.strip
-        end
-        
-        def exit?
-            @input == "exit"
-        end
-        
-        def exit
-            puts "See you later!"
-        end
-        
-        def valid_list_command?
-            @input == "coming-soon" || @input == "leaving-soon" || @input == "exit"
-        end
-        
         def unknown_command
             puts ""
             puts "I'm sorry, I don't recognize that command."
@@ -50,7 +76,21 @@ module WhatsOnNetflix
             @input = gets.strip
         end
         
-        ### Actual Data
+        ### CLI logic
+        
+        def exit?
+            @input == "exit"
+        end
+        
+        def back?
+            @input == "back"
+        end
+        
+        def valid_number?(array)
+            @input.to_i > 0 && @input.to_i < (array.length + 1)
+        end
+        
+        ### Printers
         
         def list_coming_soon
             puts "---"
@@ -89,39 +129,7 @@ module WhatsOnNetflix
             puts "#{movie.plot}"
             item_options
         end
-        
-        def start
-            while !exit?
-                list_available_commands
-                
-                if @input == "coming-soon"
-                    list_coming_soon
-                    
-                    while !exit? && @input != "back"
-                        if @input.to_i > 0 && @input.to_i < (WhatsOnNetflix::Movie.coming_soon.length + 1)
-                            list_item_coming_soon(@input)
-                        else 
-                            unknown_command
-                        end
-                    end
     
-                elsif @input == "leaving-soon"
-                    list_leaving_soon
-                       
-                    while !exit? && @input != "back"
-                        if @input.to_i > 0 && @input.to_i < (WhatsOnNetflix::Movie.leaving_soon.length + 1)
-                            list_item_leaving_soon(@input)
-                        else 
-                            unknown_command
-                        end
-                    end
-                    
-                else
-                    unknown_command
-                end
-            end
-            exit
-        end
     end
 end
 
