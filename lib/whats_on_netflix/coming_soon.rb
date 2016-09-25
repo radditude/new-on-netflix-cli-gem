@@ -5,7 +5,7 @@ module WhatsOnNetflix
         
         
         COMINGSOONTITLES = ["Princess Diaries (2016)", "X-Men (1999)", "Firefly - Season 2 (2001)"]
-        @@comingsoondata = [
+        COMINGSOONDATA = [
             [:title => "Princess Diaries", :year =>"2001", :genre => "Comedy", :stars => "Anne Hathaway, Julie Andrews", :plot => "This girl is a princess and she does stuff and Julie Andrews is a boss."],
             [:title => "X-Men", :year =>"1999", :genre => "Sci-fi", :stars => "Hugh Jackman, Anna Paquin", :plot => "Mutants doing mutant stuff. Ian McKellan is in this movie."],
             [:title => "Firefly", :year =>"2001", :genre => "Sci-fi", :stars => "Gina Rodriguez, Alan Tudyk", :plot => "Sci-fi cult show by that guy who does all the good sci-fi shows."]
@@ -26,9 +26,27 @@ module WhatsOnNetflix
         def self.coming_soon_from_list(array)
             array.each do |entry|
                 movie = self.new(entry)
+                if entry.include?(" - ")
+                    new_title = entry.split(" - ")
+                    movie.title = new_title[0]
+                else
+                    new_title = entry.split(" (")
+                    movie.title = new_title[0]
+                end
                 @@all << movie
             end
         end
+        
+    #    def self.clean_title(title)
+    #        movie = self.new(title)
+    #        if entry.include?(" - ")
+    #            new_title = entry.split(" - ")
+    #            movie.title = new_title[0]
+    #        else
+    #            new_title = entry.split(" (")
+    #            movie.title = new_title[0]
+    #        end
+    #    end
         
     #    def self.movie_1
     #        movie = self.new
