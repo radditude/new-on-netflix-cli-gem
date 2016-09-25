@@ -1,28 +1,16 @@
-# NewOnNetflix
+# Whats On Netflix
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/new_on_netflix`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+What's On Netflix is a small web scraper with a CLI interface that tells you what's coming soon and leaving soon on Netflix, using data from ComingSoon.net and IMDB.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Run the following command in your terminal:
 
-```ruby
-gem 'new_on_netflix'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install new_on_netflix
+    $ gem install whats-on-netflix
 
 ## Usage
 
-TODO: Write usage instructions here
+Run `whats-on-netflix` to get started. Then run `coming-soon` or `leaving-soon` to see a list of what's being added or removed from Netflix this month. Enter the number of a particular movie or show to get information on its genre, cast, and plot.
 
 ## Development
 
