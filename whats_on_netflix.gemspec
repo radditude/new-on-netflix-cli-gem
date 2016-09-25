@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
       "public gem pushes."
   end
 
-  spec.files         = ["config/environment.rb", "lib/whats_on_netflix.rb, lib/whats_on_netflix/movie.rb, lib/whats_on_netflix/version.rb, lib/whats_on_netflix/scraper.rb"]
+  spec.files         = ["config/environment.rb", "lib/whats_on_netflix.rb, lib/whats_on_netflix/coming_soon.rb, lib/whats_on_netflix/leaving_soon.rb, lib/whats_on_netflix/version.rb, lib/whats_on_netflix/scraper.rb"]
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
