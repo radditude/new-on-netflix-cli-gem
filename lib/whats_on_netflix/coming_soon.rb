@@ -37,6 +37,14 @@ module WhatsOnNetflix
             end
         end
         
+        def self.add_data_from_hash(hash)
+            movie = self.all.find { |flick| flick.title == hash[:title]}
+            movie.year = hash[:year]
+            movie.genre = hash[:genre]
+            movie.stars = hash[:stars]
+            movie.plot = hash[:plot]
+        end
+        
     #    def self.clean_title(title)
     #        movie = self.new(title)
     #        if entry.include?(" - ")
