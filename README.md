@@ -1,6 +1,6 @@
 # Whats On Netflix
 
-What's On Netflix is a small web scraper with a CLI interface that tells you what's coming soon and leaving soon on Netflix, using data from ComingSoon.net and IMDB.
+What's On Netflix is a small web scraper with a CLI interface that tells you what's coming soon and leaving soon on Netflix, using data from Whats-On-Netflix.com and IMDB. Hat tip to [https://github.com/o-sam-o/yayimdbs](yayimdbs) for helping me work out the finer points of scraping IMDB info.
 
 ## Installation
 

@@ -14,10 +14,15 @@ module WhatsOnNetflix
     def self.scrape_title_list(index_url)
         html = self.get_html(index_url)
         
-        titles = html.css("div.netflix-list").text
-        split = titles.split("NETFLIX OCTOBER 2016 LAST CALL")
-        @coming_soon = split[0]
-        @leaving_soon = split[1].gsub!("LEAVING OCTOBER /[0-9]/", "")
+        titles = []
+        
+        html.css("h2 + h4 + ul li").each do |title|
+            titles << title.text
+        end
+        titles
+    end
+    
+    def self.scrape_imdb_info(title)
     end
         
         
