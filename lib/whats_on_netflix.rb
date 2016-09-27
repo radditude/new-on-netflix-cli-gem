@@ -104,6 +104,7 @@ module WhatsOnNetflix
         
         def list_item_coming_soon(input)
             movie = WhatsOnNetflix::ComingSoon.all[input.to_i - 1]
+            movie.add_data_from_hash(WhatsOnNetflix::Scraper.scrape_imdb_info(movie.title))
             puts ""
             puts "#{movie.title} - #{movie.year}" 
             puts "#{movie.genre}"
