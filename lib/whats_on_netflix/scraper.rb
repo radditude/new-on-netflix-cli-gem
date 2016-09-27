@@ -1,8 +1,9 @@
 require 'nokogiri'
 require 'open-uri'
+#require 'open_uri_redirections'
 require 'pry'
 
-
+#, :allow_redirections => :all
 
 module WhatsOnNetflix
     class Scraper
@@ -36,7 +37,7 @@ module WhatsOnNetflix
         info[:genre] = ""
         
         link.css('span[itemprop="genre"]').each do |genre|
-            info[:genre].concat("/ #{genre.text} /")
+            info[:genre].concat("| #{genre.text} |")
         end
         
         info[:stars] = ""
