@@ -105,7 +105,9 @@ module WhatsOnNetflix
         def list_item_coming_soon(input)
             movie = WhatsOnNetflix::ComingSoon.all[input.to_i - 1]
             puts ""
-            puts "#{movie.title} (#{movie.year}) - #{movie.genre} - Starring #{movie.stars}"
+            puts "#{movie.title} - #{movie.year}" 
+            puts "#{movie.genre}"
+            puts "Starring #{movie.stars}"
             puts ""
             puts "#{movie.plot}"
             item_options
