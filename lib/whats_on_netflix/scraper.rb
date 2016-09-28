@@ -1,26 +1,23 @@
 require 'nokogiri'
 require 'open-uri'
-#require 'open_uri_redirections'
 require 'pry'
-
-#, :allow_redirections => :all
 
 module WhatsOnNetflix
     class Scraper
-        attr_accessor:coming_soon, :leaving_soon
     
       def self.get_html(url)
         Nokogiri::HTML(open(url))
       end
     
-      def self.scrape_title_list(index_url)
-        html = self.get_html(index_url)
+      def self.scrape_title_list(url)
+        html = self.get_html(url)
         
         titles = []
         
-        html.css("h2 + h4 + ul li").each do |title|
+        html.css("h4 + ul li").each do |title|
             titles << title.text
         end
+        
         titles
       end
     
@@ -28,31 +25,35 @@ module WhatsOnNetflix
 
       def self.scrape_imdb_info(name)
 
-        doc = Nokogiri::HTML(open("http://www.imdb.com/find?s=tt&q=" + URI.escape(name)))
+        search_page = Nokogiri::HTML(open("http://www.imdb.com/find?s=tt&q=" + URI.escape(name)))
       
-        link = Nokogiri::HTML(open("http://www.imdb.com" + "#{doc.css("td a").attribute("href").value}"))
+        movie_page = Nokogiri::HTML(open("http://www.imdb.com" + "#{search_page.css("td a").attribute("href").value}"))
         
         info = {}
         
+        info[:plot] = movie_page.css("div.summary_text").text.strip
         info[:genre] = ""
+        info[:stars] = ""
+        info[:year] = ""
         
-        link.css('span[itemprop="genre"]').each do |genre|
+        # getting info[:genre] into a readable format
+        
+        movie_page.css('span[itemprop="genre"]').each do |genre|
             info[:genre].concat("| #{genre.text} |")
         end
         
-        info[:stars] = ""
+        # getting info[:stars] into a readable format
         
-        link.css('span[itemprop="actors"]').each do |actor|
+        movie_page.css('span[itemprop="actors"]').each do |actor|
           info[:stars].concat("#{actor.text.strip} ")
         end
         
-        info[:plot] = link.css("div.summary_text").text.strip
+        # getting info[:year] - TV show and movie pages are formatted a little differently
         
-        info[:year] = ""
-        if link.css('a[title="See more release dates"]').text.include?("TV Series")
-          info[:year] = link.css('a[title="See more release dates"]').text
+        if movie_page.css('a[title="See more release dates"]').text.include?("TV Series")
+          info[:year] = movie_page.css('a[title="See more release dates"]').text
         else
-          info[:year] = link.css('span#titleYear').text.strip.gsub("(", "").gsub(")", "")
+          info[:year] = movie_page.css('span#titleYear').text.strip.gsub("(", "").gsub(")", "")
         end
         
         info

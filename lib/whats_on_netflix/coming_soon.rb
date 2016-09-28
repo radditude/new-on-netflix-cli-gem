@@ -1,37 +1,23 @@
 require 'pry'
 
 module WhatsOnNetflix
-    class ComingSoon
-        attr_accessor:display_title, :title, :year, :genre, :stars, :plot
-        @@all = []
+    class ComingSoon < List
         
-        def initialize(display_title)
-            @display_title = display_title
-        end
+        @@all = []
         
         def self.all
             @@all
         end
         
-        def self.add_movies
-            self.coming_soon_from_list(WhatsOnNetflix::Scraper.scrape_title_list("http://www.whats-on-netflix.com/coming-soon/september-2016-new-netflix-releases/"))
+        def self.list_url
+            "http://www.whats-on-netflix.com/coming-soon/#{self.current_month}-#{self.current_year}-new-netflix-releases/"
         end
         
-        def self.coming_soon_from_list(array)
-            array.each do |entry|
-                movie = self.new(entry)
-                new_title = entry.split("(")
-                movie.title = new_title[0].strip
-                @@all << movie
-            end
+        def self.list
+            puts "= = = = ="
+            puts "Coming Soon on Netflix"
+            puts "= = = = ="
+            self.print_list
         end
-        
-        def add_data_from_hash(hash)
-            self.year = hash[:year]
-            self.genre = hash[:genre]
-            self.stars = hash[:stars]
-            self.plot = hash[:plot]
-        end
-        
     end
 end

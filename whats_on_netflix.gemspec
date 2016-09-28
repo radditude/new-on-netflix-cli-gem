@@ -22,15 +22,16 @@ Gem::Specification.new do |spec|
       "public gem pushes."
   end
 
-  spec.files         = ["config/environment.rb", "lib/whats_on_netflix.rb, lib/whats_on_netflix/coming_soon.rb, lib/whats_on_netflix/leaving_soon.rb, lib/whats_on_netflix/version.rb, lib/whats_on_netflix/scraper.rb"]
+  spec.files         = ["config/environment.rb", "lib/whats_on_netflix.rb, lib/whats_on_netflix/coming_soon.rb, lib/whats_on_netflix/leaving_soon.rb, lib/whats_on_netflix/version.rb, lib/whats_on_netflix/scraper.rb, lib/whats_on_netflix/list.rb"]
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
+  spec.add_runtime_dependency "nokogiri"
+  
   spec.add_development_dependency "bundler", "~> 1.13"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "pry"
   spec.add_development_dependency "nokogiri"
-  spec.add_development_dependency "open_uri_redirections"
 end
