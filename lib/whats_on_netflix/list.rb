@@ -6,11 +6,8 @@ module WhatsOnNetflix
             @display_title = display_title
         end
         
-        def add_data_from_hash(hash)
-            self.year = hash[:year]
-            self.genre = hash[:genre]
-            self.stars = hash[:stars]
-            self.plot = hash[:plot]
+        def self.add_movies
+            self.create_from_array(WhatsOnNetflix::Scraper.scrape_title_list(self.list_url))
         end
         
         def self.create_from_array(array)
@@ -22,6 +19,15 @@ module WhatsOnNetflix
             end
         end
         
+        def add_data_from_hash(hash)
+            self.year = hash[:year]
+            self.genre = hash[:genre]
+            self.stars = hash[:stars]
+            self.plot = hash[:plot]
+        end
+        
+        ### used to generate current url for whats-on-netflix.com
+        
         def self.current_month
             Date::MONTHNAMES[Date.today.month].downcase
         end
@@ -30,9 +36,7 @@ module WhatsOnNetflix
             Date.today.year
         end
         
-        def self.add_movies
-            self.create_from_array(WhatsOnNetflix::Scraper.scrape_title_list(self.list_url))
-        end
+        ### CLI printers
         
         def self.print_list
             self.all.each_with_index do |movie, index|
