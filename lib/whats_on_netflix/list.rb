@@ -50,6 +50,7 @@ module WhatsOnNetflix
             puts "Starring #{movie.stars}"
             puts ""
             puts "#{movie.plot}"
+            movie
         end
         
     end

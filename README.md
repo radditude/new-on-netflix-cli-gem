@@ -1,12 +1,12 @@
-# Whats On Netflix
+# What's On Netflix
 
-What's On Netflix is a small web scraper with a CLI interface that tells you what's coming soon and leaving soon on Netflix, using data from Whats-On-Netflix.com and IMDB. Hat tip to [https://github.com/o-sam-o/yayimdbs](yayimdbs) for helping me work out the finer points of scraping IMDB info.
+What's On Netflix is a small web scraper with a CLI interface that tells you what's coming soon and leaving soon on Netflix. What's On Netflix pulls data from Whats-On-Netflix.com and IMDB. Hat tip to [https://github.com/o-sam-o/yayimdbs](yayimdbs) for helping me work out the finer points of scraping IMDB info.
 
 ## Installation
 
-Run the following command in your terminal:
+Once you've downloaded the code and cd-ed into the proper directory, run the following command in your terminal:
 
-    $ gem install whats-on-netflix
+    $ gem install whats-on-netflix-cli-gem-0.1.0.gem
 
 ## Usage
 
