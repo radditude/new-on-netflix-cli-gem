@@ -6,8 +6,12 @@ module WhatsOnNetflix
         
         def initialize
             WhatsOnNetflix::ComingSoon.add_movies
+            WhatsOnNetflix::LeavingSoon.add_movies
             @input = ""
+            puts ""
+            puts "============================="
             puts "Welcome to What's On Netflix!"
+            puts "============================="
         end
         
         def start
@@ -15,22 +19,26 @@ module WhatsOnNetflix
                 list_available_commands
                 
                 if @input == "coming-soon"
-                    list_coming_soon
+                    WhatsOnNetflix::ComingSoon.list
+                    list_options
                     
                     while !exit? && !back?
                         if valid_number?(WhatsOnNetflix::ComingSoon.all)
-                            list_item_coming_soon(@input)
+                            WhatsOnNetflix::ComingSoon.item(@input)
+                            item_options
                         else 
                             unknown_command
                         end
                     end
     
                 elsif @input == "leaving-soon"
-                    list_leaving_soon
+                    WhatsOnNetflix::LeavingSoon.list
+                    list_options
                        
                     while !exit? && !back?
                         if valid_number?(WhatsOnNetflix::LeavingSoon.all)
-                            list_item_leaving_soon(@input)
+                            WhatsOnNetflix::LeavingSoon.item(@input)
+                            item_options
                         else 
                             unknown_command
                         end
@@ -50,22 +58,33 @@ module WhatsOnNetflix
         end
         
         def item_options
-            puts "= = = = = = = = = = = = = = ="
-            puts "Enter another number, back, or exit."
+            puts ""
+            puts "---"
+            puts "Options:"
+            puts "enter another number from the list"
+            puts "back: see a different list"
+            puts "exit: exit"
             @input = gets.strip
         end
         
         def list_available_commands
             puts ""
-            puts "Available commands are: coming-soon, leaving-soon, and exit."
+            puts "---"
+            puts "Options:"
+            puts "coming-soon: see what's new on Netflix this month"
+            puts "leaving-soon: see what's leaving Netflix this month"
+            puts "exit: exit"
             puts ""
             @input = gets.strip
         end
         
         def list_options
-            puts "= = = = = = = = = = = = = = ="
-            puts "Enter a number to learn more, back to see a different list."
-            puts "Enter exit at any time to exit."
+            puts ""
+            puts "---"
+            puts "Options:"
+            puts "enter a number to see more"
+            puts "back: see a different list"
+            puts "exit: exit"
             @input = gets.strip
         end
         
@@ -88,49 +107,6 @@ module WhatsOnNetflix
         
         def valid_number?(array)
             @input.to_i > 0 && @input.to_i < (array.length + 1)
-        end
-        
-        ### Printers
-        
-        def list_coming_soon
-            puts "---"
-            puts "Coming Soon on Netflix"
-            puts "---"
-            WhatsOnNetflix::ComingSoon.all.each_with_index do |movie, index|
-                puts "#{index + 1}. #{movie.display_title}"
-            end
-            list_options
-        end
-        
-        def list_item_coming_soon(input)
-            movie = WhatsOnNetflix::ComingSoon.all[input.to_i - 1]
-            movie.add_data_from_hash(WhatsOnNetflix::Scraper.scrape_imdb_info(movie.title))
-            puts ""
-            puts "#{movie.title} - #{movie.year}" 
-            puts "#{movie.genre}"
-            puts "Starring #{movie.stars}"
-            puts ""
-            puts "#{movie.plot}"
-            item_options
-        end
-        
-        def list_leaving_soon
-            puts "---"
-            puts "Leaving Soon from Netflix"
-            puts "---"
-            WhatsOnNetflix::LeavingSoon.all.each_with_index do |movie, index|
-                puts "#{index + 1}. #{movie.title} (#{movie.year})"
-            end
-            list_options
-        end
-        
-        def list_item_leaving_soon(input)
-            movie = WhatsOnNetflix::LeavingSoon.all[input.to_i - 1]
-            puts ""
-            puts "#{movie.title} (#{movie.year}) - #{movie.genre} - Starring #{movie.stars}"
-            puts ""
-            puts "#{movie.plot}"
-            item_options
         end
     
     end
