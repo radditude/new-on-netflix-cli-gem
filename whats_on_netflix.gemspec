@@ -6,10 +6,10 @@ require 'whats_on_netflix/version'
 Gem::Specification.new do |spec|
   spec.name          = "whats-on-netflix"
   spec.version       = WhatsOnNetflix::VERSION
-  spec.authors       = ["Clare"]
+  spec.authors       = ["Clare Horton"]
   spec.email         = ["clare.e.horton@gmail.com"]
 
-  spec.summary       = "A summary"
+  spec.summary       = "See what's being added and removed from Netflix this month"
   spec.homepage      = "https://github.com/radditude/whats-on-netflix-cli-gem"
   spec.license       = "MIT"
 
