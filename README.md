@@ -6,7 +6,7 @@ What's On Netflix is a small web scraper with a CLI interface that tells you wha
 
 Once you've downloaded the code and cd-ed into the proper directory, run the following command in your terminal:
 
-    $ gem install whats-on-netflix-cli-gem-0.1.0.gem
+    $ gem install whats-on-netflix
 
 ## Usage
 
