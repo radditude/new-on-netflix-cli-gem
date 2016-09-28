@@ -22,16 +22,19 @@ Gem::Specification.new do |spec|
       "public gem pushes."
   end
 
-  spec.files         = ["config/environment.rb", "lib/whats_on_netflix.rb, lib/whats_on_netflix/coming_soon.rb, lib/whats_on_netflix/leaving_soon.rb, lib/whats_on_netflix/version.rb, lib/whats_on_netflix/scraper.rb, lib/whats_on_netflix/list.rb"]
-  spec.bindir        = "exe"
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
-  spec.require_paths = ["lib"]
+  spec.files         = `git ls-files`.split($\)
+  spec.executables   = ["whats-on-netflix"]
+  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
+  spec.name          = "whats-on-netflix-cli-gem"
+  spec.require_paths = ["lib", "lib/whats_on_netflix", "config"]
+  spec.version       = WhatsOnNetflix::VERSION
+  spec.license       = "MIT"
 
-  spec.add_runtime_dependency "nokogiri"
+  spec.add_runtime_dependency "nokogiri", "~>1"
   
   spec.add_development_dependency "bundler", "~> 1.13"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
-  spec.add_development_dependency "pry"
-  spec.add_development_dependency "nokogiri"
+  spec.add_development_dependency "pry", "~> 0"
+  spec.add_development_dependency "nokogiri", "~>1"
 end
