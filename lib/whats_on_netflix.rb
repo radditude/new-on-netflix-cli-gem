@@ -3,7 +3,7 @@
 module WhatsOnNetflix
     class CLI
         attr_accessor:input
-        
+
         def initialize
             WhatsOnNetflix::ComingSoon.add_movies
             WhatsOnNetflix::LeavingSoon.add_movies
@@ -13,50 +13,55 @@ module WhatsOnNetflix
             puts "Welcome to What's On Netflix!"
             puts "============================="
         end
-        
+
         def start
             while !exit?
                 list_available_commands
-                
+
                 if @input == "coming-soon"
                     WhatsOnNetflix::ComingSoon.list
                     list_options
-                    
+
                     while !exit? && !back?
                         if valid_number?(WhatsOnNetflix::ComingSoon.all)
+                          begin
                             WhatsOnNetflix::ComingSoon.item(@input)
+                          rescue
+                            puts ""
+                            puts "Sorry, we couldn't get info for this title!"
+                          end
                             item_options
-                        else 
+                        else
                             unknown_command
                         end
                     end
-    
+
                 elsif @input == "leaving-soon"
                     WhatsOnNetflix::LeavingSoon.list
                     list_options
-                       
+
                     while !exit? && !back?
                         if valid_number?(WhatsOnNetflix::LeavingSoon.all)
                             WhatsOnNetflix::LeavingSoon.item(@input)
                             item_options
-                        else 
+                        else
                             unknown_command
                         end
                     end
-                    
+
                 elsif !exit?
                     unknown_command
                 end
             end
             exit
         end
-        
+
         ### CLI dialogue
-        
+
         def exit
             puts "See you later!"
         end
-        
+
         def item_options
             puts ""
             puts "---"
@@ -66,7 +71,7 @@ module WhatsOnNetflix
             puts "exit: exit"
             @input = gets.strip
         end
-        
+
         def list_available_commands
             puts ""
             puts "---"
@@ -77,7 +82,7 @@ module WhatsOnNetflix
             puts ""
             @input = gets.strip
         end
-        
+
         def list_options
             puts ""
             puts "---"
@@ -87,28 +92,28 @@ module WhatsOnNetflix
             puts "exit: exit"
             @input = gets.strip
         end
-        
+
         def unknown_command
             puts ""
             puts "I'm sorry, I don't recognize that command."
             puts ""
             @input = gets.strip
         end
-        
+
         ### CLI logic
-        
+
         def exit?
             @input == "exit"
         end
-        
+
         def back?
             @input == "back"
         end
-        
+
         def valid_number?(array)
             @input.to_i > 0 && @input.to_i < (array.length + 1)
         end
-    
+
     end
 end
 
