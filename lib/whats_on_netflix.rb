@@ -42,7 +42,12 @@ module WhatsOnNetflix
 
                     while !exit? && !back?
                         if valid_number?(WhatsOnNetflix::LeavingSoon.all)
+                          begin
                             WhatsOnNetflix::LeavingSoon.item(@input)
+                          rescue
+                            puts ""
+                            puts "Sorry, we couldn't get info for this title!"
+                          end
                             item_options
                         else
                             unknown_command
